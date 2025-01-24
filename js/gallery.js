@@ -82,17 +82,18 @@ images.forEach((image) => {
   fragment.append(listItem);
 });
 gallery.append(fragment);
-console.log(gallery)
-
-const a = document.querySelector("a");
-a.addEventListener('click', (event) => {
-  event.preventDefault();
-});
 
 gallery.addEventListener("click", modal);
+
 function modal(event) {
+  event.preventDefault(); 
   if (event.target.nodeName !== "IMG") {
     return;
   }
-  console.log(event.target.dataset.source);
+  const bigImageSource = event.target.dataset.source;
+  const instance = basicLightbox.create(`
+    <img src="${bigImageSource}" alt="${event.target.alt}" style="max-width: 100%; max-height: 100%;">
+  `);
+  instance.show();
 }
+
